@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libsoftclip_lib.a CMakeFiles/softclip_lib.dir/modules/softClip.cpp.o
+/usr/bin/ranlib ../../lib/libsoftclip_lib.a

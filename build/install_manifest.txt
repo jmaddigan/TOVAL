@@ -1,0 +1,2 @@
+/Users/jamesmaddigan/Documents/KT Audio/DEV/KT Delay/delivery/Default_Toolchain/lib/libKT_Effect.a
+/Users/jamesmaddigan/Documents/KT Audio/DEV/KT Delay/delivery/Default_Toolchain/inc/KTdelay.h

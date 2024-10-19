@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libKT_Effect.a CMakeFiles/KT_Effect.dir/KTEffect/KTdelay.cpp.o
+/usr/bin/ranlib ../../lib/libKT_Effect.a
