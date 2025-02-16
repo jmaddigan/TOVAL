@@ -20,6 +20,7 @@ private:
     
     struct Variables;
     Variables* pVariables;
+    //Test
 };
 
 #endif // KT_ADAPTIVEEQ_H
