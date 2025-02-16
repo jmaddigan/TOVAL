@@ -19,5 +19,5 @@ option(DELIVERY "option to add library to delivery folder" OFF)
 
 add_subdirectory(audioDSP/src)
 add_subdirectory(audioDSP/inc)
-add_subdirectory(app/src)
-add_subdirectory(app/inc)
+add_subdirectory(test/src)
+add_subdirectory(test/inc)
