@@ -2,8 +2,7 @@
 #define SOFTCLIP_TEST_H
 
 #include <iostream>
-#include "softClip.h"
-#include "KTaudio.h"
+#include "TOVALaudio.h"
 
 /*
     Can look into using inheritance for all module test classes

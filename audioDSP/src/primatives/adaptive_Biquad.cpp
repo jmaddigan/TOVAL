@@ -3,9 +3,9 @@
 #include "conversionFN.h"
 using namespace std;
 
-KT_ERROR AdaptiveBiquad::AdaptiveBiquad_init(uint16_t channelID)
+TOVAL_ERROR AdaptiveBiquad::AdaptiveBiquad_init(uint16_t channelID)
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
     this->channelID = channelID;
 
     cout<<"Adaptive Biquad Init print for channel " << this->channelID <<endl;
@@ -17,37 +17,37 @@ KT_ERROR AdaptiveBiquad::AdaptiveBiquad_init(uint16_t channelID)
     return ret;
 }
 
- KT_ERROR AdaptiveBiquad::set_minBiquadCoeff(size_t data_length, void* data)
+ TOVAL_ERROR AdaptiveBiquad::set_minBiquadCoeff(size_t data_length, void* data)
  {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
     if(data_length == sizeof(biquadcoeff))
     {
         minBiquadCoeffs = *reinterpret_cast<biquadcoeff*>(data);
     }
     else{
         cout << "Biquad size error" << endl;
-        ret = KT_ERROR::SIZE_ERROR;
+        ret = TOVAL_ERROR::SIZE_ERROR;
     }
     return ret;
  }
 
-  KT_ERROR AdaptiveBiquad::set_maxBiquadCoeff(size_t data_length, void* data)
+  TOVAL_ERROR AdaptiveBiquad::set_maxBiquadCoeff(size_t data_length, void* data)
  {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
     if(data_length == sizeof(biquadcoeff))
     {
         maxBiquadCoeffs = *reinterpret_cast<biquadcoeff*>(data);
     }
     else{
         cout << "Biquad size error" << endl;
-        ret = KT_ERROR::SIZE_ERROR;
+        ret = TOVAL_ERROR::SIZE_ERROR;
     }
     return ret;
  }
 
-KT_ERROR AdaptiveBiquad::set_minGain(size_t data_length, void* data)
+TOVAL_ERROR AdaptiveBiquad::set_minGain(size_t data_length, void* data)
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
 
     // Max gain passed as linear value
 
@@ -57,14 +57,14 @@ KT_ERROR AdaptiveBiquad::set_minGain(size_t data_length, void* data)
     }
     else
     {
-        ret = KT_ERROR::SIZE_ERROR;
+        ret = TOVAL_ERROR::SIZE_ERROR;
     }
     return ret;
 }
 
- KT_ERROR AdaptiveBiquad::set_maxGain(size_t data_length, void* data)
+ TOVAL_ERROR AdaptiveBiquad::set_maxGain(size_t data_length, void* data)
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
 
     // Max gain passed as linear value
 
@@ -74,15 +74,15 @@ KT_ERROR AdaptiveBiquad::set_minGain(size_t data_length, void* data)
     }
     else
     {
-        ret = KT_ERROR::SIZE_ERROR;
+        ret = TOVAL_ERROR::SIZE_ERROR;
     }
     return ret;
 }
 
 
-KT_ERROR AdaptiveBiquad::set_stepResponse(size_t data_length, void* data)
+TOVAL_ERROR AdaptiveBiquad::set_stepResponse(size_t data_length, void* data)
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
     /*
         Currently, there is just a scale of 0.3 and 0.9
         But in future, I want to group the scale into 3 groups, you can select Slow, Medium or fast.
@@ -97,19 +97,19 @@ KT_ERROR AdaptiveBiquad::set_stepResponse(size_t data_length, void* data)
     }
     else
     {
-        ret = KT_ERROR::SIZE_ERROR;
+        ret = TOVAL_ERROR::SIZE_ERROR;
     }
     if((alpha < alphaMin) || (alpha > alphaMax))
     {
-        ret = KT_ERROR::PARAMETER_ERROR;
+        ret = TOVAL_ERROR::PARAMETER_ERROR;
         cout << "step Response Alpha value out of Range. Returning Parameter Error " << endl;
     }
     return ret;
 }
 
-KT_ERROR AdaptiveBiquad::set_CurrentBiquadCoeff(biquadcoeff &currentBiquad, biquadcoeff minCoeffs, biquadcoeff maxCoeffs,  float scale)
+TOVAL_ERROR AdaptiveBiquad::set_CurrentBiquadCoeff(biquadcoeff &currentBiquad, biquadcoeff minCoeffs, biquadcoeff maxCoeffs,  float scale)
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
 
     currentBiquad.coeff[0] = (1 - scale) * minCoeffs.coeff[0] + scale * maxCoeffs.coeff[0];
     currentBiquad.coeff[1] = (1 - scale) * minCoeffs.coeff[1] + scale * maxCoeffs.coeff[1];
@@ -121,9 +121,9 @@ KT_ERROR AdaptiveBiquad::set_CurrentBiquadCoeff(biquadcoeff &currentBiquad, biqu
 
 }
 
-KT_ERROR AdaptiveBiquad::interpolateCurrentGain(size_t data_length, float *ppIn) 
+TOVAL_ERROR AdaptiveBiquad::interpolateCurrentGain(size_t data_length, float *ppIn) 
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
     float sumGainDB = 0.0f;
 
     // Convert linear input to dB and sum up
@@ -153,9 +153,9 @@ KT_ERROR AdaptiveBiquad::interpolateCurrentGain(size_t data_length, float *ppIn)
     return ret;
 }
 
-KT_ERROR AdaptiveBiquad::AdaptiveBiquad_process(float *pIn, float *pOut)
+TOVAL_ERROR AdaptiveBiquad::AdaptiveBiquad_process(float *pIn, float *pOut, size_t nspc)
 {
-    KT_ERROR ret = KT_ERROR::NO_ERROR;
+    TOVAL_ERROR ret = TOVAL_ERROR::NO_ERROR;
 
     biquadcoeff currentCoeffs;
     

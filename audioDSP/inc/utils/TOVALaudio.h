@@ -1,25 +1,27 @@
-#ifndef KTAUDIO_H
-#define KTAUDIO_H
+#ifndef TOVALAUDIO_H
+#define TOVALAUDIO_H
 
 //Use ifdef to stop definition of enum twice if called mulitiple times
 
 #include <cstdint>
 
-#define KT_VERSION_MAJOR 1
-#define KT_VERSION_MINOR 0
-#define KT_VERSION_PATCH 0
+#define TOVAL_VERSION_MAJOR 1
+#define TOVAL_VERSION_MINOR 0
+#define TOVAL_VERSION_PATCH 0
 
-#define NUM_SAMPLES_PER_CHANNEL 1024
-#define NUM_CHANNELS 2
+//#define NUM_CHANNELS 2
 #define SAMPLE_RATE 48000
 #define BIQUAD_NUM_COEFFS 5
 
-enum class KT_ERROR : std::uint32_t{
+enum class TOVAL_ERROR : std::uint32_t{
     NO_ERROR = 0,
-    SIZE_ERROR = 1,
-    PARAMID_ERROR = 2,
-    PARAMETER_ERROR = 3,
-    NULL_PTR_ERROR = 4
+    SIZE_ERROR,
+    CONFIG_ERROR,
+    PARAMID_ERROR,
+    PARAMETER_ERROR,
+    NULL_POINTER_ERROR,
+    INPUT_WAV_ERROR,
+    OUTPUT_WAV_ERROR,
     // Make full list of error codes
 };
 

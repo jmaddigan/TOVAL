@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Path to the utils.h file where the version macros are defined
-UTILS_H="../audioDSP/inc/utils/KTAudio.h"
+UTILS_H="../audioDSP/inc/utils/TOVALaudio.h"
 
 # Extract the version numbers from the utils.h file
-MAJOR_VERSION=$(grep -E '#define KT_VERSION_MAJOR' "$UTILS_H" | awk '{print $3}')
-MINOR_VERSION=$(grep -E '#define KT_VERSION_MINOR' "$UTILS_H" | awk '{print $3}')
-PATCH_VERSION=$(grep -E '#define KT_VERSION_PATCH' "$UTILS_H" | awk '{print $3}')
+MAJOR_VERSION=$(grep -E '#define TOVAL_VERSION_MAJOR' "$UTILS_H" | awk '{print $3}')
+MINOR_VERSION=$(grep -E '#define TOVAL_VERSION_MINOR' "$UTILS_H" | awk '{print $3}')
+PATCH_VERSION=$(grep -E '#define TOVAL_VERSION_PATCH' "$UTILS_H" | awk '{print $3}')
 
 # Check if version extraction succeeded
 if [ -z "$MAJOR_VERSION" ] || [ -z "$MINOR_VERSION" ] || [ -z "$PATCH_VERSION" ]; then
@@ -15,7 +15,7 @@ if [ -z "$MAJOR_VERSION" ] || [ -z "$MINOR_VERSION" ] || [ -z "$PATCH_VERSION" ]
 fi
 
 # Print the extracted version
-echo "Building KT Audio software version $MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
+echo "Building Tonal Valley Audio software version $MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
 
 # Parse command line options
 DELIVERY_FLAG="OFF"

@@ -1,7 +1,7 @@
 #ifndef ADAPTIVEBIQUAD_H
 #define ADAPTIVEBIQUAD_H
 
-#include "KTaudio.h"
+#include "TOVALaudio.h"
 #include <cstddef>
 #include <cstdint>
 #include <math.h>
@@ -11,29 +11,29 @@ class AdaptiveBiquad {
 
     public:     // Do I need private functions?
     
-    KT_ERROR AdaptiveBiquad_init(uint16_t channelID);
-    KT_ERROR AdaptiveBiquad_process(float *pIn, float *pOut);
+    TOVAL_ERROR AdaptiveBiquad_init(uint16_t channelID);
+    TOVAL_ERROR AdaptiveBiquad_process(float *pIn, float *pOut, size_t nspc);
 
 
-    KT_ERROR set_minBiquadCoeff(size_t data_length, void* data);
-    KT_ERROR set_maxBiquadCoeff(size_t data_length, void* data);
+    TOVAL_ERROR set_minBiquadCoeff(size_t data_length, void* data);
+    TOVAL_ERROR set_maxBiquadCoeff(size_t data_length, void* data);
 
-    KT_ERROR set_minGain(size_t data_length, void* data);                   // Done
-    KT_ERROR set_maxGain(size_t data_length, void* data);                   // Done
-    KT_ERROR set_stepResponse(size_t data_length, void* data);              // Done
-    KT_ERROR interpolateCurrentGain(size_t data_length, float *ppIn);       // Done
+    TOVAL_ERROR set_minGain(size_t data_length, void* data);                   // Done
+    TOVAL_ERROR set_maxGain(size_t data_length, void* data);                   // Done
+    TOVAL_ERROR set_stepResponse(size_t data_length, void* data);              // Done
+    TOVAL_ERROR interpolateCurrentGain(size_t data_length, float *ppIn);       // Done
     
 
 
-    KT_ERROR set_MinMaxBiquadCoeff(size_t data_length, void* data);               // Done
+    TOVAL_ERROR set_MinMaxBiquadCoeff(size_t data_length, void* data);               // Done
  
-    KT_ERROR get_minGain(size_t data_length, void* data);
-    KT_ERROR get_maxGain(size_t data_length, void* data);
-    KT_ERROR get_minBiquadCoeff(size_t data_length, void* data);
-    KT_ERROR get_maxBiquadCoeff(size_t data_length, void* data);
-    KT_ERROR get_stepResponse(size_t data_length, void* data);
+    TOVAL_ERROR get_minGain(size_t data_length, void* data);
+    TOVAL_ERROR get_maxGain(size_t data_length, void* data);
+    TOVAL_ERROR get_minBiquadCoeff(size_t data_length, void* data);
+    TOVAL_ERROR get_maxBiquadCoeff(size_t data_length, void* data);
+    TOVAL_ERROR get_stepResponse(size_t data_length, void* data);
 
-    KT_ERROR interpolateCoefficients(size_t data_length, void* data);     // called by public get function. fills data with current calculated coefficients
+    TOVAL_ERROR interpolateCoefficients(size_t data_length, void* data);     // called by public get function. fills data with current calculated coefficients
                                                                           // declares local biquadcoeff struct object, does interpolation calculation, 
                                                                           // then fills data pointer with local biquad coeff values (interpolated from min and max variables)
 
@@ -67,10 +67,7 @@ class AdaptiveBiquad {
     biquadcoeff minBiquadCoeffs;
     biquadcoeff maxBiquadCoeffs;
 
-    KT_ERROR set_CurrentBiquadCoeff(biquadcoeff &currentBiquad, biquadcoeff minCoeffs, biquadcoeff maxCoeffs,  float scale);
-
-
-    uint16_t nspc = NUM_SAMPLES_PER_CHANNEL;
+    TOVAL_ERROR set_CurrentBiquadCoeff(biquadcoeff &currentBiquad, biquadcoeff minCoeffs, biquadcoeff maxCoeffs,  float scale);
 
 };
 
